@@ -4,20 +4,19 @@
 	"title": "Event Calendar",
 	"description": "Full-sized drag & drop event calendar with resource & timeline views",
 	"keywords": [
-	  "calendar",
-	  "event",
-	  "resource",
-	  "timeline",
-	  "full-sized"
+		"calendar",
+		"event",
+		"resource",
+		"timeline",
+		"full-sized"
 	],
 	"homepage": "https://vkurko.github.io/calendar/",
 	"repository": {
-	  "type": "git",
-	  "url": "https://github.com/rgon/calendar.git"
+		"type": "git",
+		"url": "https://github.com/rgon/calendar.git"
 	},
 	"author": "https://github.com/vkurko",
 	"license": "MIT",
-	 
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -31,7 +30,8 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
-		}
+		},
+		"./index.css": "./dist/index.css"
 	},
 	"files": [
 		"dist",
@@ -54,5 +54,9 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"postcss": "^8.4.47",
+		"postcss-load-config": "^5.1.0"
+	}
 }

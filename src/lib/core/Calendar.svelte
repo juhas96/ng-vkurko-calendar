@@ -1,5 +1,5 @@
 <script>
-    import './styles/index.scss';
+    import '../styles/index.scss';
     import {setContext, beforeUpdate, afterUpdate} from 'svelte';
     import {get} from 'svelte/store';
     import {diff} from './storage/options';
