@@ -164,8 +164,7 @@ You must use at least one plugin that provides a view. The following plugins are
 Then, in your Svelte component, use the calendar something like this:
 ```html
 <script>
-    import Calendar from '@event-calendar/core';
-    import TimeGrid from '@event-calendar/time-grid';
+    import { Calendar, TimeGrid } from '@rgon/event-calendar';
 
     let plugins = [TimeGrid];
     let options = {
@@ -180,8 +179,7 @@ Then, in your Svelte component, use the calendar something like this:
 ```
 Or in ES6 module:
 ```js
-import Calendar from '@event-calendar/core';
-import TimeGrid from '@event-calendar/time-grid';
+import { Calendar, TimeGrid } from '@rgon/event-calendar';
 
 let ec = new Calendar({
     target: document.getElementById('ec'),
@@ -196,9 +194,9 @@ let ec = new Calendar({
     }
 });
 ```
-The CSS is located at `@event-calendar/core/index.css`. If your build tool supports CSS processing, you can import it like this:
+The CSS is located at `@rgon/event-calendar/index.css`. If your build tool supports CSS processing, you can import it like this:
 ```js
-import '@event-calendar/core/index.css';
+import '@rgon/event-calendar/index.css';
 ```
 
 ### Pre-built browser ready bundle
@@ -238,8 +236,7 @@ ec.setOption('slotDuration', '01:00');
 In Svelte, you can simply update the original `options` object.
 ```html
 <script>
-    import Calendar from '@event-calendar/core';
-    import TimeGrid from '@event-calendar/time-grid';
+    import { Calendar, TimeGrid } from '@rgon/event-calendar';
 
     let plugins = [TimeGrid];
     let options = {
@@ -2256,8 +2253,7 @@ Methods allow you to manipulate the Event Calendar after initialization. They ar
 In Svelte, methods are available from a component instance:
 ```html
 <script>
-    import Calendar from '@event-calendar/core';
-    import TimeGrid from '@event-calendar/time-grid';
+    import { Calendar, TimeGrid } from '@rgon/event-calendar';
 
     let ec;
     let plugins = [TimeGrid];
