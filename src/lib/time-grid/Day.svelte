@@ -10,7 +10,7 @@
         rect,
         setPayload,
         bgEvent
-    } from '@event-calendar/core';
+    } from '../lib/index.js';
     import {groupEventChunks} from './utils';
     import Event from './Event.svelte';
     import NowIndicator from './NowIndicator.svelte';

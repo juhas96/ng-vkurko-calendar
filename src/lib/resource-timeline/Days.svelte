@@ -3,7 +3,7 @@
     import {
         cloneDate, addDay, eventIntersects, createEventChunk, prepareEventChunks,
         runReposition, debounce, max, ceil, bgEvent
-    } from '@event-calendar/core';
+    } from '../lib/index.js';
     import Day from './Day.svelte';
 
     export let resource;

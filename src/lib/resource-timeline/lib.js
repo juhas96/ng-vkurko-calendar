@@ -1,4 +1,4 @@
-import {createDuration} from '@event-calendar/core';
+import {createDuration} from '../lib/index.js';
 
 export function repositionEvent(chunk, dayChunks, longChunks, height, allDay) {
     chunk.top = 0;

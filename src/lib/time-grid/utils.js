@@ -1,5 +1,5 @@
-import {is_function} from '@event-calendar/core';
-import {sortEventChunks} from '@event-calendar/core';
+import {is_function} from '../lib/index.js';
+import {sortEventChunks} from '../lib/index.js';
 
 export function groupEventChunks(chunks) {
     if (!chunks.length) {

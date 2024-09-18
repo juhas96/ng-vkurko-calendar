@@ -1,6 +1,6 @@
 <script>
     import {getContext} from 'svelte';
-    import {toSeconds} from '@event-calendar/core';
+    import {toSeconds} from '../lib/index.js';
     import {getSlotTimeLimits} from './lib.js';
     import Days from './Days.svelte';
 

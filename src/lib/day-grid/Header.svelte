@@ -1,6 +1,6 @@
 <script>
     import {getContext} from 'svelte';
-    import {setContent} from '@event-calendar/core';
+    import {setContent} from '../lib/index.js';
 
     let {theme, _intlDayHeader, _intlDayHeaderAL, _days} = getContext('state');
 </script>

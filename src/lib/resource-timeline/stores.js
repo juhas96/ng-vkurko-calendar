@@ -1,5 +1,5 @@
 import {derived} from 'svelte/store';
-import {createSlotTimeLimits, createTimes} from '@event-calendar/core';
+import {createSlotTimeLimits, createTimes} from '../lib/index.js';
 
 // slotTimeLimits per day
 export function dayTimeLimits(state) {

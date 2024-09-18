@@ -13,7 +13,7 @@
         resourceTextColor,
         task, height, DAY_IN_SECONDS, toSeconds,
         is_function
-    } from '@event-calendar/core';
+    } from '../lib/index.js';
     import {repositionEvent, getSlotTimeLimits} from './lib.js';
 
     export let date;

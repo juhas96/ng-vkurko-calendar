@@ -1,7 +1,7 @@
 <script>
     import {getContext, tick} from 'svelte';
     import {cloneDate, addDay, eventIntersects, bgEvent, createEventChunk, prepareEventChunks,
-        runReposition, debounce} from '@event-calendar/core';
+        runReposition, debounce} from '../lib/index.js';
     import Day from './Day.svelte';
 
     export let dates;

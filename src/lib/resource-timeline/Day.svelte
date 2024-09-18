@@ -11,7 +11,7 @@
         setPayload,
         toSeconds,
         runReposition
-    } from '@event-calendar/core';
+    } from '../lib/index.js';
     import {getSlotTimeLimits} from './lib.js';
     import Event from './Event.svelte';
 

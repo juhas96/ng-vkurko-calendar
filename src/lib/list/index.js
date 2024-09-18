@@ -1,4 +1,4 @@
-import {btnTextDay, btnTextWeek, btnTextMonth, btnTextYear, intl, themeView} from '@event-calendar/core';
+import {btnTextDay, btnTextWeek, btnTextMonth, btnTextYear, intl, themeView} from '../lib/index.js';
 import View from './View.svelte';
 
 export default {

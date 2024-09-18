@@ -1,6 +1,6 @@
 <script>
     import {getContext} from 'svelte';
-    import {datesEqual, runReposition, setPayload} from '@event-calendar/core';
+    import {datesEqual, runReposition, setPayload} from '../../lib/index.js';
     import Event from './Event.svelte';
 
     export let date;

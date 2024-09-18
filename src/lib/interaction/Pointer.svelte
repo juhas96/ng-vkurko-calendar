@@ -1,6 +1,6 @@
 <script>
     import {getContext} from 'svelte';
-    import {addDuration, cloneDate, getElementWithPayload, getPayload} from '@event-calendar/core';
+    import {addDuration, cloneDate, getElementWithPayload, getPayload} from '../lib/index.js';
 
     let {_iEvents, slotDuration} = getContext('state');
 

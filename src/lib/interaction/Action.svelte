@@ -19,7 +19,7 @@
         toViewWithLocalDates,
         listView, timelineView,
         is_function, listen, run_all
-    } from '@event-calendar/core';
+    } from '../lib/index.js';
     import {animate, limit} from './utils';
 
     let {_iEvents, _iClass, _events, _view, _dayGrid, _draggable, _bodyEl, dateClick, dragScroll, datesAboveResources,

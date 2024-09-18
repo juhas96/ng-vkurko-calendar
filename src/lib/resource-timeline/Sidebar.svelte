@@ -1,6 +1,6 @@
 <script>
     import {getContext, afterUpdate} from 'svelte';
-    import {max} from '@event-calendar/core';
+    import {max} from '../lib/index.js';
     import Label from './Label.svelte';
 
     let {_viewResources, _headerEl, _resHs, _sidebarEl, theme} = getContext('state');

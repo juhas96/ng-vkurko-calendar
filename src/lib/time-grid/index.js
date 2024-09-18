@@ -1,4 +1,4 @@
-import {btnTextDay, btnTextWeek, themeView} from '@event-calendar/core';
+import {btnTextDay, btnTextWeek, themeView} from '../lib/index.js';
 import {slotTimeLimits, times} from './stores.js';
 import View from './View.svelte';
 

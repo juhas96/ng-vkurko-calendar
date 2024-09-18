@@ -1,7 +1,7 @@
 <script>
     import {getContext, tick} from 'svelte';
     import {datesEqual, setContent, createEventChunk, addDay, cloneDate, assign, setPayload, toISOString,
-        keyEnter, runReposition, is_function} from '@event-calendar/core';
+        keyEnter, runReposition, is_function} from '../lib/index.js';
     import Event from './Event.svelte';
     import Popup from './Popup.svelte';
 

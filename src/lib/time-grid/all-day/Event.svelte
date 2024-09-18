@@ -14,7 +14,7 @@
         keyEnter,
         task, rect, ancestor, bgEvent,
         is_function
-    } from '@event-calendar/core';
+    } from '../../lib/index.js';
 
     export let chunk;
     export let longChunks = {};

@@ -1,5 +1,5 @@
 import {writable} from 'svelte/store';
-import {btnTextMonth, intl, themeView} from '@event-calendar/core';
+import {btnTextMonth, intl, themeView} from '../lib/index.js';
 import {days} from './stores.js';
 import View from './View.svelte';
 

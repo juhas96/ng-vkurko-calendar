@@ -7,7 +7,7 @@
         prepareEventChunks,
         eventIntersects,
         debounce, runReposition, bgEvent
-    } from '@event-calendar/core';
+    } from '../../lib/index.js';
     import Day from './Day.svelte';
 
     export let dates;

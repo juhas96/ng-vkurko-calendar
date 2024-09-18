@@ -11,7 +11,7 @@
         resourceTextColor,
         task,
         is_function
-    } from '@event-calendar/core';
+    } from '../lib/index.js';
 
     export let chunk;
 
