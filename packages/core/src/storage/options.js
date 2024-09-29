@@ -24,6 +24,9 @@ export function createOptions(plugins) {
             month: 'numeric',
             day: 'numeric'
         },
+        monthHeaderFormat: {
+            month: 'short',
+        },
         dayHeaderAriaLabelFormat: {
             dateStyle: 'full'
         },

@@ -46,6 +46,7 @@ export default class {
         this._intlEventTime = intlRange(this.locale, this.eventTimeFormat);
         this._intlSlotLabel = intl(this.locale, this.slotLabelFormat);
         this._intlDayHeader = intl(this.locale, this.dayHeaderFormat);
+        this._intlMonthHeader = intl(this.locale, this.monthHeaderFormat);
         this._intlDayHeaderAL = intl(this.locale, this.dayHeaderAriaLabelFormat);
         this._intlTitle = intlRange(this.locale, this.titleFormat);
         this._bodyEl = writable(undefined);

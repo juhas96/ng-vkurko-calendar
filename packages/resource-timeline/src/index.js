@@ -1,6 +1,6 @@
 import {writable} from 'svelte/store';
 import {btnTextDay, btnTextMonth, btnTextWeek, themeView, viewResources} from '@event-calendar/core';
-import {dayTimeLimits, dayTimes} from './stores.js';
+import {daysInWeek, dayTimeLimits, dayTimes, weekDays} from './stores.js';
 import View from './View.svelte';
 
 export default {
@@ -39,7 +39,10 @@ export default {
 				weekday: 'short',
 				day: 'numeric'
 			},
-			duration: {months: 1},
+			monthHeaderFormat: {
+				month: 'short',
+			},
+			duration: {months: 3},
 			slotDuration: {days: 1},
 			theme: themeView('ec-timeline ec-resource-month-view'),
 			titleFormat: {year: 'numeric', month: 'long'}
@@ -53,6 +56,8 @@ export default {
 		state._headerEl = writable(undefined);
 		state._dayTimeLimits = dayTimeLimits(state);  // flexible time limits per day
 		state._dayTimes = dayTimes(state);
+		state._weekDays = weekDays(state);
+		state._daysInWeek =	daysInWeek(state);
 		state._resHs = writable(new Map());  // resource row heights
 		state._sidebarEl = writable(undefined);
 	}

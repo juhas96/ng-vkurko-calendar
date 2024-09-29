@@ -152,6 +152,24 @@ export function prevDate(date, duration, hiddenDays) {
 }
 
 /**
+ * Returns week number if day is first day of the week
+ */
+export function getWeekNumber(date) {
+    // Create a new date set to the beginning of the year
+    const startOfYear = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+
+    // Calculate the difference in milliseconds between the current date and the start of the year
+    const diff = date - startOfYear;
+
+    // Convert milliseconds to days
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay) + 1;
+
+    // Calculate the week number
+    return Math.ceil(dayOfYear / 7);
+}
+
+/**
  * Private functions
  */
 
