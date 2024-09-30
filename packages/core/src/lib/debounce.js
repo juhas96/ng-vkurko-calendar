@@ -1,4 +1,4 @@
-import {run_all} from './utils.js';
+import {run_all} from 'svelte/internal';
 
 export function debounce(fn, handle, queueStore) {
     queueStore.update(queue => queue.set(handle, fn));

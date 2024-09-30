@@ -1,5 +1,5 @@
 import {writable} from 'svelte/store';
-import {noop} from '@event-calendar/core';
+import {noop} from 'svelte/internal';
 import Auxiliary from './Auxiliary.svelte';
 
 export default {

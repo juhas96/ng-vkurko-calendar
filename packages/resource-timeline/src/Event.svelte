@@ -1,5 +1,6 @@
 <script>
     import {afterUpdate, getContext, onMount} from 'svelte';
+    import {is_function} from 'svelte/internal';
     import {
         createEventContent,
         createEventClasses,
@@ -11,8 +12,7 @@
         keyEnter,
         resourceBackgroundColor,
         resourceTextColor,
-        task, height, DAY_IN_SECONDS, toSeconds,
-        is_function
+        task, height, DAY_IN_SECONDS, toSeconds
     } from '@event-calendar/core';
     import {repositionEvent, getSlotTimeLimits} from './lib.js';
 

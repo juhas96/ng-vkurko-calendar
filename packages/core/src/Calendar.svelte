@@ -1,6 +1,7 @@
 <script>
     import './styles/index.scss';
     import {setContext, beforeUpdate, afterUpdate} from 'svelte';
+    import {destroy_component, get_current_component} from 'svelte/internal';
     import {get} from 'svelte/store';
     import {diff} from './storage/options';
     import State from './storage/state';
@@ -22,6 +23,8 @@
 
     export let plugins = [];
     export let options = {};
+
+    let component = get_current_component();
 
     let state = new State(plugins, options);
     setContext('state', state);
@@ -109,6 +112,10 @@
             return info;
         }
         return null;
+    }
+
+    export function destroy() {
+        destroy_component(component, true);
     }
 
     export function next() {

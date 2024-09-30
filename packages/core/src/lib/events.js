@@ -1,7 +1,8 @@
 import {addDay, datesEqual, createDate, cloneDate, setMidnight, toLocalDate, toISOString, noTimePart, copyTime} from './date';
 import {createElement} from './dom';
-import {assign, isArray, is_function} from './utils';
+import {assign, isArray} from './utils';
 import {toViewWithLocalDates} from './view';
+import {is_function} from 'svelte/internal';
 
 let eventId = 1;
 export function createEvents(input) {
