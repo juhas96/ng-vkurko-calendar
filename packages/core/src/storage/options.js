@@ -60,6 +60,7 @@ export function createOptions(plugins) {
         height: undefined,
         hiddenDays: [],
         highlightedDates: [],  // ec option
+        holidays: [], // ec option
         lazyFetching: true,
         loading: undefined,
         locale: undefined,
@@ -103,6 +104,7 @@ export function createOptions(plugins) {
             header: 'ec-header',
             hiddenScroll: 'ec-hidden-scroll',
             highlight: 'ec-highlight',
+            holiday: 'ec-holiday',
             icon: 'ec-icon',
             line: 'ec-line',
             lines: 'ec-lines',
@@ -117,6 +119,7 @@ export function createOptions(plugins) {
             toolbar: 'ec-toolbar',
             view: '',
             weekdays: ['ec-sun', 'ec-mon', 'ec-tue', 'ec-wed', 'ec-thu', 'ec-fri', 'ec-sat'],
+            weekend: 'ec-weekend',
             withScroll: 'ec-with-scroll'
         },
         titleFormat: {

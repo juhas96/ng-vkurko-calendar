@@ -91,6 +91,16 @@ export function toISOString(date, len = 19) {
     return date.toISOString().substring(0, len);
 }
 
+export function isHoliday(date, holidays) {
+    return holidays.some(holiday => datesEqualWithoutTime(date, holiday));
+}
+
+function datesEqualWithoutTime(date1, date2) {
+    return date1.getUTCFullYear() === date2.getUTCFullYear() &&
+        date1.getUTCMonth() === date2.getUTCMonth() &&
+        date1.getUTCDate() === date2.getUTCDate();
+}
+
 export function datesEqual(date1, ...dates2) {
     return dates2.every(date2 => date1.getTime() === date2.getTime());
 }

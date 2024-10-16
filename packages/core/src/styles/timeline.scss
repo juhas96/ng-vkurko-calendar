@@ -76,6 +76,10 @@
     text-overflow: ellipsis;
   }
 
+  .ec-time.ec-weekend, .ec-time.ec-holiday {
+    color: var(--ec-weekend-holiday-text-color);
+  }
+
   .ec-time, .ec-line {
     width: 72px;
   }
