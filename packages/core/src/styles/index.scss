@@ -339,7 +339,9 @@
 .ec-event-body {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: auto;
+  left: 0.5rem;
+  position: sticky;
 
   .ec-day-grid &,
   .ec-all-day &,
