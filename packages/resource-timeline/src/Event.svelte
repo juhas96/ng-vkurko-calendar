@@ -58,7 +58,7 @@
         }
         let bgColor = event.backgroundColor || resourceBackgroundColor(event, $resources) || $eventBackgroundColor || $eventColor;
         let txtColor = event.textColor || resourceTextColor(event, $resources) || $eventTextColor;
-        let marginTop = margin;
+        let marginTop = margin === 1 ? margin : margin + 4;
         if (event._margin) {
             // Force margin for helper events
             let [_margin, _resource] = event._margin;

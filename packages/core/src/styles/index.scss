@@ -312,8 +312,6 @@
   box-shadow: 0 0 1px 0 var(--ec-border-color);
   background-color: var(--ec-event-bg-color);
   border-radius: 3px;
-  font-size: .85em;
-  line-height: 1.5;
   z-index: 1;  // put it above the pointer event (for multi-day events in month view)
 
   .ec-day-grid &,

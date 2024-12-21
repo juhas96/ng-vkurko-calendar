@@ -92,6 +92,8 @@
 
   .ec-event {
     position: absolute;
+    flex-direction: row!important;
+    overflow-x: scroll;
   }
 
   .ec-bg-event {
