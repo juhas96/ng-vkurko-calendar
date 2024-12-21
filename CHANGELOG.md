@@ -1,5 +1,16 @@
 # Event Calendar changelog
 
+## 3.7.2
+December 18, 2024
+
+* Fixed an issue with overlapping events with zero duration ([377](https://github.com/vkurko/calendar/issues/377))
+* Fixed an issue with displaying resources in `resourceTimeGrid` view after expanding/collapsing nested resources in `resourceTimeline` view ([393](https://github.com/vkurko/calendar/issues/393))
+
+## 3.7.1
+November 29, 2024
+
+* Now the minimum displayed event size is fixed at the `slotDuration` value ([377](https://github.com/vkurko/calendar/issues/377))
+
 ## 3.7.0
 November 7, 2024
 

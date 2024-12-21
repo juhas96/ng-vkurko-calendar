@@ -13,7 +13,7 @@
         resourceBackgroundColor,
         resourceTextColor,
         task,
-        isFunction
+        isFunction, cloneDate, subtractDuration
     } from '@event-calendar/core';
 
     export let date;
@@ -105,7 +105,12 @@
 
     function createDragHandler(interaction, resize) {
         return interaction.action
-            ? jsEvent => interaction.action.drag(event, jsEvent, resize)
+            ? jsEvent => interaction.action.drag(
+                event,
+                jsEvent,
+                resize,
+                resize && chunk.zeroDuration ? subtractDuration(cloneDate(event.end), $slotDuration) : undefined
+            )
             : undefined;
     }
 
