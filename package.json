@@ -25,6 +25,7 @@
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/rollup-darwin-arm64": "4.27.4",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "date-fns": "^4.1.0",
