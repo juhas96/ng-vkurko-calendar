@@ -1,7 +1,7 @@
 <script>
     import {getContext} from 'svelte';
     import {setContent, toISOString, toSeconds, getWeekNumber, isHoliday} from '@event-calendar/core';
-    import {isWeekend} from "date-fns";
+    import {isSunday} from "date-fns";
 
     let {_headerEl, _intlDayHeader, _intlDayHeaderAL,_intlMonthHeader, _dayTimes, _viewDates, _weekDays, _daysInWeek, slotDuration, theme, holidays} = getContext('state');
     console.log('HOLI: ', $holidays);
@@ -39,7 +39,7 @@
                     </div>
                     <div class="{$theme.times}">
                         {#each $_daysInWeek[week] as date}
-                            <div class="{$theme.time} {isWeekend(date) ? $theme.weekend : ''} {isHoliday(date, $holidays) ? $theme.holiday : ''}" role="columnheader">
+                            <div class="{$theme.time} {isSunday(date) ? $theme.weekend : ''} {isHoliday(date, $holidays) ? $theme.holiday : ''}" role="columnheader">
                                 <time
                                     datetime="{toISOString(date, 10)}"
                                     aria-label="{$_intlDayHeaderAL.format(date)}"
