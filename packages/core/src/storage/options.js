@@ -1,12 +1,6 @@
 import {
-    assign,
-    createDate,
-    createDuration,
-    keys,
-    setMidnight,
-    createEvents,
-    createEventSources,
-    createResources
+    assign, createDate, createDuration, createEvents, createEventSources, createResources, createDateRange, keys,
+    setMidnight
 } from '../lib.js';
 
 export function createOptions(plugins) {
@@ -94,6 +88,7 @@ export function createOptions(plugins) {
             day: 'ec-day',
             dayHead: 'ec-day-head',
             days: 'ec-days',
+            disabled: 'ec-disabled',
             event: 'ec-event',
             eventBody: 'ec-event-body',
             eventTime: 'ec-event-time',
@@ -127,6 +122,7 @@ export function createOptions(plugins) {
             month: 'short',
             day: 'numeric'
         },
+        validRange: undefined,
         view: undefined,
         viewDidMount: undefined,
         views: {}
@@ -151,7 +147,8 @@ export function createParsers(plugins) {
         scrollTime: createDuration,
         slotDuration: createDuration,
         slotMaxTime: createDuration,
-        slotMinTime: createDuration
+        slotMinTime: createDuration,
+        validRange: createDateRange
     };
 
     for (let plugin of plugins) {

@@ -1,5 +1,16 @@
 # Event Calendar changelog
 
+## 3.10.0
+February 4, 2025
+
+* Added `validRange` option ([141](https://github.com/vkurko/calendar/issues/141))
+
+## 3.9.0
+January 27, 2025
+
+* Added support for week numbers in `dayGrid` view ([389](https://github.com/vkurko/calendar/issues/389))
+* Fixed dates in the return value of the `addEvent()` method ([419](https://github.com/vkurko/calendar/issues/419))
+
 ## 3.8.0
 January 6, 2025
 

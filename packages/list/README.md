@@ -4,7 +4,7 @@ See [demo](https://vkurko.github.io/calendar/) and [changelog](CHANGELOG.md).
 
 Full-sized drag & drop JavaScript event calendar with resource & timeline views:
 
-* Lightweight (37kb [br](https://en.wikipedia.org/wiki/Brotli) compressed)
+* Lightweight (38kb [br](https://en.wikipedia.org/wiki/Brotli) compressed)
 * Zero-dependency (pre-built bundle)
 * Used on over 70,000 websites with [Bookly](https://wordpress.org/plugins/bookly-responsive-appointment-booking-tool/)
 
@@ -47,9 +47,9 @@ Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options
   - [eventDragMinDistance](#eventdragmindistance)
   - [eventDragStart](#eventdragstart)
   - [eventDragStop](#eventdragstop)
+  - [eventDrop](#eventdrop)
   </td><td>
 
-  - [eventDrop](#eventdrop)
   - [eventDurationEditable](#eventdurationeditable)
   - [eventLongPressDelay](#eventlongpressdelay)
   - [eventMouseEnter](#eventmouseenter)
@@ -77,10 +77,10 @@ Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options
   - [locale](#locale)
   - [longPressDelay](#longpressdelay)
   - [moreLinkContent](#morelinkcontent)
-  </td><td>
-
   - [noEventsClick](#noeventsclick)
   - [noEventsContent](#noeventscontent)
+  </td><td>
+
   - [nowIndicator](#nowindicator)
   - [pointer](#pointer)
   - [resources](#resources)
@@ -104,9 +104,12 @@ Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options
   - [unselect](#unselect)
   - [unselectAuto](#unselectauto)
   - [unselectCancel](#unselectcancel)
+  - [validRange](#validrange)
   - [view](#view)
   - [viewDidMount](#viewdidmount)
   - [views](#views)
+  - [weekNumberContent](#weeknumbercontent)
+  - [weekNumbers](#weeknumbers)
   </td></tr>
   </table>
 - [Methods](#methods)
@@ -204,8 +207,8 @@ Or in your Svelte component, use the calendar like this:
 ### Pre-built browser ready bundle
 Include the following lines of code in the `<head>` section of your page:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.8.0/event-calendar.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.8.0/event-calendar.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.10.0/event-calendar.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.10.0/event-calendar.min.js"></script>
 ```
 
 <details>
@@ -2228,6 +2231,38 @@ A CSS selector that specifies elements that will ignore the [unselectAuto](#unse
 
 Clicking on elements that match this CSS selector will prevent the current selection from being cleared (because of the [unselectAuto](#unselectauto) option).
 
+### validRange
+- Type `object`
+- Default `undefined`
+
+If set, the calendar will allow navigation only within the specified date range. Navigation buttons will be grayed out to prevent the user from navigating to an invalid range.
+
+The range should be an object with the following properties:
+<table>
+<tr>
+<td>
+
+`start`
+</td>
+<td>
+
+`string` or `Date` This should be either an ISO8601 date string like `'2025-12-31'`, or a JavaScript Date object holding the range start date
+</td>
+</tr>
+<tr>
+<td>
+
+`end`
+</td>
+<td>
+
+`string` or `Date` This should be either an ISO8601 date string like `'2025-12-31'`, or a JavaScript Date object holding the range end date
+</td>
+</tr>
+</table>
+
+It is not necessary to specify both properties. The range may have only `start` and no `end`, or vice versa.
+
 ### view
 - Type `string`
 - Default `'resourceTimeGridWeek'`
@@ -2262,6 +2297,45 @@ The mounted [View](#view-object) object
 - Default `{}`
 
 You can specify options that apply only to specific views. To do so provide separate options objects within the `views` option, keyed by the name of the view.
+
+### weekNumberContent
+- Type `Content` or `function`
+- Default `undefined`
+
+Defines the text that is displayed in place of the default week number (such as `W01`).
+
+This value can be either a [Content](#content) or a function that returns content:
+
+```js
+function (arg) {
+  // return Content
+}
+```
+`arg` is an object with the following properties:
+<table>
+<tr>
+<td>
+
+`date`
+</td>
+<td>JavaScript Date object containing the day within which the week number will be displayed</td>
+</tr>
+<tr>
+<td>
+
+`week`
+</td>
+<td>Calculated week number</td>
+</tr>
+</table>
+
+### weekNumbers
+- Type `boolean`
+- Default `false`
+
+Determines whether week numbers should be displayed in the `dayGrid` view.
+
+The numbering of weeks depends on the value of [firstDay](#firstday). When `firstDay` is `0`, the [Western](https://en.wikipedia.org/wiki/Week#Other_week_numbering_systems) system is used. Any other value uses the [ISO](https://en.wikipedia.org/wiki/Week#The_ISO_week_date_system) system.
 
 ## Methods
 Methods allow you to manipulate the Event Calendar after initialization. They are accessible from the calendar instance.
