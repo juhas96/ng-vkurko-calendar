@@ -1,7 +1,6 @@
 import {
-    assign, createDate, createDuration, createEvents, createEventSources, createResources, createDateRange, keys,
-    setMidnight
-} from '../lib.js';
+    createDate, createDuration, createEvents, createEventSources, createResources, createDateRange, keys, setMidnight
+} from '#lib';
 
 export function createOptions(plugins) {
     let options = {
@@ -67,6 +66,7 @@ export function createOptions(plugins) {
         slotDuration: '00:30:00',
         slotEventOverlap: true,
         slotHeight: 24,  // ec option
+        slotLabelInterval: undefined,
         slotLabelFormat: {
             hour: 'numeric',
             minute: '2-digit'
@@ -146,6 +146,7 @@ export function createParsers(plugins) {
         resources: createResources,
         scrollTime: createDuration,
         slotDuration: createDuration,
+        slotLabelInterval: input => input !== undefined ? createDuration(input) : undefined,
         slotMaxTime: createDuration,
         slotMinTime: createDuration,
         validRange: createDateRange
@@ -165,7 +166,5 @@ export function diff(options, prevOptions) {
             diff.push([key, options[key]]);
         }
     }
-    assign(prevOptions, options);
-
     return diff;
 }

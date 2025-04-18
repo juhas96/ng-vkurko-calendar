@@ -1,19 +1,21 @@
-# Event Calendar [![](https://data.jsdelivr.com/v1/package/npm/@event-calendar/build/badge)](https://www.jsdelivr.com/package/npm/@event-calendar/build) [![npm](https://img.shields.io/npm/dm/@event-calendar/core?color=red&label=npm&style=flat-square)](https://www.npmjs.com/package/@event-calendar/core)
+# EventCalendar [![](https://data.jsdelivr.com/v1/package/npm/@event-calendar/build/badge)](https://www.jsdelivr.com/package/npm/@event-calendar/build) [![npm](https://img.shields.io/npm/dm/@event-calendar/core?color=red&label=npm&style=flat-square)](https://www.npmjs.com/package/@event-calendar/core)
 
 See [demo](https://vkurko.github.io/calendar/) and [changelog](CHANGELOG.md).
 
 Full-sized drag & drop JavaScript event calendar with resource & timeline views:
 
-* Lightweight (38kb [br](https://en.wikipedia.org/wiki/Brotli) compressed)
-* Zero-dependency (pre-built bundle)
+* Lightweight (33kb [br](https://en.wikipedia.org/wiki/Brotli) compressed)
+* 100% human-coded
+* Zero-dependency (standalone bundle)
 * Used on over 70,000 websites with [Bookly](https://wordpress.org/plugins/bookly-responsive-appointment-booking-tool/)
 
-Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options.
+Inspired by [FullCalendar](https://fullcalendar.io/), it implements similar options.
 
 ## Table of contents
 - [Usage](#usage)
-  - [JavaScript module / Svelte component](#javascript-module--svelte-component)
-  - [Pre-built browser ready bundle](#pre-built-browser-ready-bundle)
+  - [JavaScript module](#javascript-module)
+  - [Svelte 5 component](#svelte-5-component)
+  - [Standalone bundle](#standalone-bundle)
   - [Modifying options after initialization](#modifying-options-after-initialization)
 - [Options](#options)
   <table>
@@ -33,6 +35,7 @@ Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options
   - [dayMaxEvents](#daymaxevents)
   - [dayPopoverFormat](#daypopoverformat)
   - [displayEventEnd](#displayeventend)
+  - [dragConstraint](#dragconstraint)
   - [dragScroll](#dragscroll)
   - [duration](#duration)
   - [editable](#editable)
@@ -79,23 +82,26 @@ Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options
   - [moreLinkContent](#morelinkcontent)
   - [noEventsClick](#noeventsclick)
   - [noEventsContent](#noeventscontent)
+  - [nowIndicator](#nowindicator)
   </td><td>
 
-  - [nowIndicator](#nowindicator)
   - [pointer](#pointer)
+  - [resizeConstraint](#resizeconstraint)
   - [resources](#resources)
   - [resourceLabelContent](#resourcelabelcontent)
   - [resourceLabelDidMount](#resourcelabeldidmount)
+  - [scrollTime](#scrolltime)
   - [select](#select)
   - [selectable](#selectable)
   - [selectBackgroundColor](#selectbackgroundcolor)
+  - [selectConstraint](#selectconstraint)
   - [selectLongPressDelay](#selectlongpressdelay)
   - [selectMinDistance](#selectmindistance)
-  - [scrollTime](#scrolltime)
   - [slotDuration](#slotduration)
   - [slotEventOverlap](#sloteventoverlap)
   - [slotHeight](#slotheight)
   - [slotLabelFormat](#slotlabelformat)
+  - [slotLabelInterval](#slotlabelinterval)
   - [slotMaxTime](#slotmaxtime)
   - [slotMinTime](#slotmintime)
   - [slotWidth](#slotwidth)
@@ -129,7 +135,6 @@ Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options
   </td><td>
 
   - [dateFromPoint](#datefrompoint-x-y-)
-  - [destroy](#destroy)
   - [getView](#getview)
   - [next](#next)
   - [prev](#prev)
@@ -148,67 +153,82 @@ Inspired by [FullCalendar](https://fullcalendar.io/), implements similar options
 - [Browser support](#browser-support)
 
 ## Usage
-### JavaScript module / Svelte component
+### JavaScript module
 The first step is to install the Event Calendar `core` package:
 ```bash
 npm install --save-dev @event-calendar/core
 ```
-Then install any additional plugins you plan to use:
-```bash
-npm install --save-dev @event-calendar/time-grid
-```
-You must use at least one plugin that provides a view. The following plugins are currently available:
+This package provides functions for creating and destroying the calendar, as well as plugins for various views. You must use at least one plugin that provides a view. The following plugins are currently available:
 
-* `@event-calendar/day-grid`
-* `@event-calendar/list`
-* `@event-calendar/resource-timeline`
-* `@event-calendar/resource-time-grid`
-* `@event-calendar/time-grid`
-* `@event-calendar/interaction` (doesn't provide a view)
+* `DayGrid`
+* `List`
+* `ResourceTimeline`
+* `ResourceTimeGrid`
+* `TimeGrid`
+* `Interaction` (doesn't provide a view)
 
 Then, in your JavaScript module:
 ```js
-import Calendar from '@event-calendar/core';
-import TimeGrid from '@event-calendar/time-grid';
+import {createCalendar, destroyCalendar, TimeGrid} from '@event-calendar/core';
 // Import CSS if your build tool supports it
 import '@event-calendar/core/index.css';
 
-let ec = new Calendar({
-    target: document.getElementById('ec'),
-    props: {
-        plugins: [TimeGrid],
-        options: {
-            view: 'timeGridWeek',
-            events: [
-                // your list of events
-            ]
-        }
-    }
-});
-```
-Or in your Svelte component, use the calendar like this:
-```html
-<script>
-    import Calendar from '@event-calendar/core';
-    import TimeGrid from '@event-calendar/time-grid';
-
-    let plugins = [TimeGrid];
-    let options = {
+let ec = createCalendar(
+    // HTML element the calendar will be mounted to
+    document.getElementById('ec'),
+    // Array of plugins
+    [TimeGrid],
+    // Options object
+    {
         view: 'timeGridWeek',
         events: [
             // your list of events
         ]
-    };
-</script>
+    }
+);
 
-<Calendar {plugins} {options} />
+// If you later need to destroy the calendar then use
+destroyCalendar(ec);
 ```
 
-### Pre-built browser ready bundle
-Include the following lines of code in the `<head>` section of your page:
+### Svelte 5 component
+The first step is to install the Event Calendar `core` package:
+```bash
+npm install --save-dev @event-calendar/core
+```
+This package provides the `Calendar` component, as well as plugins for various views. You must use at least one plugin that provides a view. The following plugins are currently available:
+
+* `DayGrid`
+* `List`
+* `ResourceTimeline`
+* `ResourceTimeGrid`
+* `TimeGrid`
+* `Interaction` (doesn't provide a view)
+
+Then in your Svelte 5 component, use the calendar like this:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.10.0/event-calendar.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.10.0/event-calendar.min.js"></script>
+<script>
+    import {Calendar, TimeGrid} from '@event-calendar/core';
+
+    let options = $state({
+        view: 'timeGridWeek',
+        events: [
+            // your list of events
+        ]
+    });
+</script>
+
+<Calendar plugins={[TimeGrid]} {options} />
+```
+The calendar is destroyed gracefully when the component containing it is destroyed.
+
+### Standalone bundle
+This bundle contains a version of the calendar that includes all plugins and is prepared for use in the browser via the &lt;script&gt; tag.
+
+The first step is to include the following lines of code in the `<head>` section of your page:
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@4.0.1/dist/event-calendar.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@4.0.1/dist/event-calendar.min.js"></script>
 ```
 
 <details>
@@ -216,8 +236,8 @@ Include the following lines of code in the `<head>` section of your page:
 
 > Please note that the file paths contain an indication of a specific version of the library. You can remove this indication, then the latest version will be loaded:
 > ```html
-> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build/event-calendar.min.css">
-> <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build/event-calendar.min.js"></script>
+> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build/dist/event-calendar.min.css">
+> <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build/dist/event-calendar.min.js"></script>
 > ```
 > But it is recommended to always specify the version and explicitly update it if necessary, in order to avoid unpredictable problems when a new version of the library is released.
 
@@ -225,12 +245,15 @@ Include the following lines of code in the `<head>` section of your page:
 
 Then initialize the calendar like this:
 ```js
-let ec = new EventCalendar(document.getElementById('ec'), {
+let ec = EventCalendar.create(document.getElementById('ec'), {
     view: 'timeGridWeek',
     events: [
         // your list of events
     ]
 });
+
+// If you later need to destroy the calendar then use
+EventCalendar.destroy(ec);
 ```
 
 ### Modifying options after initialization
@@ -241,21 +264,19 @@ ec.setOption('slotDuration', '01:00');
 In Svelte, you can simply update the original `options` object.
 ```html
 <script>
-    import Calendar from '@event-calendar/core';
-    import TimeGrid from '@event-calendar/time-grid';
+    import {Calendar, TimeGrid} from '@event-calendar/core';
 
-    let plugins = [TimeGrid];
-    let options = {
+    let options = $state({
         view: 'timeGridWeek'
-    };
+    });
 
     function updateOptions() {
         options.slotDuration = '01:00';
     }
 </script>
 
-<button on:click={updateOptions}>Change slot duration</button>
-<Calendar {plugins} {options} />
+<button onclick={updateOptions}>Change slot duration</button>
+<Calendar plugins={[TimeGrid]} {options} />
 ```
 
 ## Options
@@ -636,6 +657,15 @@ function (date) {
 > - resourceTimelineWeek `false`
 
 Determines whether to display an event’s end time.
+
+### dragConstraint
+- Type `function`
+- Default `undefined`
+- Requires `Interaction` plugin
+
+Callback function that limits the date/time range into which events are allowed to be dragged.
+
+The function is triggered during dragging for each cursor movement and takes the same parameters as [eventDrop](#eventdrop). The function should return `true` if dragging to the new position is allowed, and `false` otherwise.
 
 ### dragScroll
 - Type `boolean`
@@ -1227,6 +1257,16 @@ The associated [Event](#event-object) object
 <td>
 
 An [Event](#event-object) object that holds information about the event before the resize
+</td>
+</tr>
+<tr>
+<td>
+
+`startDelta`
+</td>
+<td>
+
+A [Duration](#duration-object) object that represents the amount of time the event’s start date was moved by
 </td>
 </tr>
 <tr>
@@ -1828,6 +1868,15 @@ Enables a marker indicating the current time in `timeGrid`/`resourceTimeGrid` vi
 
 Enables mouse cursor pointer in `timeGrid`/`resourceTimeGrid` and other views.
 
+### resizeConstraint
+- Type `function`
+- Default `undefined`
+- Requires `Interaction` plugin
+
+Callback function that limits the date/time range within which the event is allowed to resize.
+
+The function is triggered during resizing for each cursor movement and takes the same parameters as [eventResize](#eventresize). The function should return `true` if the new size is allowed, and `false` otherwise.
+
 ### resources
 - Type `array`
 - Default `[]`
@@ -1904,6 +1953,14 @@ The associated [Resource](#resource-object) object
 <td>If it is a column that is within a specific date, this will be a Date object</td>
 </tr>
 </table>
+
+### scrollTime
+- Type `string`, `integer` or `object`
+- Default `'06:00:00'`
+
+Determines how far forward the scroll pane is initially scrolled.
+
+This should be a value that can be parsed into a [Duration](#duration-object) object.
 
 ### select
 - Type `function`
@@ -1990,6 +2047,15 @@ If the current view is a resource view, the [Resource](#resource-object) object 
 
 Determines whether the user is allowed to highlight multiple days or time slots by clicking and moving the pointer.
 
+### selectConstraint
+- Type `function`
+- Default `undefined`
+- Requires `Interaction` plugin
+
+Callback function that limits the date/time range that can be selected.
+
+The function is triggered during selection for each cursor movement and takes the same parameters as [select](#select). The function should return `true` if the selected range is allowed, and `false` otherwise.
+
 ### selectBackgroundColor
 - Type `string`
 - Default `undefined`
@@ -2014,14 +2080,6 @@ If not specified, it falls back to [longPressDelay](#longpressdelay).
 - Requires `Interaction` plugin
 
 Defines how many pixels the user’s mouse must move before the selection begins.
-
-### scrollTime
-- Type `string`, `integer` or `object`
-- Default `'06:00:00'`
-
-Determines how far forward the scroll pane is initially scrolled.
-
-This should be a value that can be parsed into a [Duration](#duration-object) object.
 
 ### slotDuration
 - Type `string`, `integer` or `object`
@@ -2076,6 +2134,18 @@ function (time) {
 </tr>
 </table>
 
+### slotLabelInterval
+- Type `string`, `integer` or `object`
+- Default `undefined`
+
+The interval at which slot labels should be displayed in `timeGrid` views.
+
+This should be a value that can be parsed into a [Duration](#duration-object) object.
+
+If not specified, then if `slotDuration` is less than 1 hour, the interval is considered to be twice as long, i.e. the labels are displayed every other time.
+
+If the interval is set to zero, then labels are displayed for all slots, including the very first one, which is not normally displayed.
+
 ### slotMaxTime
 - Type `string`, `integer` or `object`
 - Default `'24:00:00'`
@@ -2096,7 +2166,7 @@ This should be a value that can be parsed into a [Duration](#duration-object) ob
 - Type `integer`
 - Default `72`
 
-Defines the time slot width in pixels in `ResourceTimeline` views. When changing the setting, you must additionally override the following CSS styles:
+Defines the time slot width in pixels in `resourceTimeline` views. When changing the setting, you must additionally override the following CSS styles:
 
 ```css
 .ec-timeline .ec-time, .ec-timeline .ec-line {
@@ -2471,14 +2541,6 @@ If the current view is a resource view, the [Resource](#resource-object) object 
 </table>
 
 Using this method, you can, for example, find out on which day a click occurred inside a multi-day event. To do this, inside [eventClick](#eventclick), pass the `jsEvent.clientX` and `jsEvent.clientY` coordinates to `dateFromPoint` and get the desired date.
-
-### destroy()
-- Return value `undefined`
-- Not available in Svelte
-
-Destroys the calendar, removing all DOM elements, event handlers, and internal data.
-
-Please note that this method is not available in Svelte. Instead, the calendar is destroyed gracefully when the component containing it is destroyed.
 
 ### getView()
 - Return value `View`
@@ -3070,6 +3132,4 @@ A list of all available CSS variables can be found [here](packages/core/src/styl
 
 ## Browser support
 
-The latest versions of Chrome, Firefox, Safari, and Edge are supported.
-
-> The library is compiled to support browsers that match the following browserslist configuration: `defaults and supports fetch`. You can see the resulting list [here](https://browsersl.ist/#q=defaults+and+supports+fetch).
+The latest versions of Chrome, Firefox, Safari, and Edge are [supported](https://vite.dev/guide/build.html#browser-compatibility).
