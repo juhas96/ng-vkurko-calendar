@@ -67,7 +67,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <article
     bind:this={el}
-    class={classNames}
+    class="{classNames} mat-mdc-card mdc-card mat-mdc-card-raised mdc-card--raised"
     {style}
     role={onclick ? 'button' : undefined}
     tabindex={onclick ? 0 : undefined}

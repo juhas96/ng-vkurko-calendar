@@ -122,10 +122,12 @@ export function createOptions(plugins) {
             month: 'short',
             day: 'numeric'
         },
+        timelineScrollDirection: undefined,
         validRange: undefined,
         view: undefined,
         viewDidMount: undefined,
-        views: {}
+        views: {},
+        monthsChanged: undefined
     };
 
     for (let plugin of plugins) {

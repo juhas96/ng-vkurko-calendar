@@ -34,8 +34,8 @@ export function activeRange(state) {
 
 export function currentRange(state) {
     return derived(
-        [state.date, state.duration, state.firstDay],
-        ([$date, $duration, $firstDay]) => {
+        [state.date, state.duration, state.firstDay, state.timelineScrollDirection],
+        ([$date, $duration, $firstDay, $timelineScrollDirection]) => {
             let start = cloneDate($date), end;
             if ($duration.months) {
                 start.setUTCDate(1);

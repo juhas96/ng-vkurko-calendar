@@ -109,12 +109,12 @@
     }
 
     export function next() {
-        $date = nextDate($date, $duration);
+        $date = nextDate($date, {...$duration, months: 1});
         return this;
     }
 
     export function prev() {
-        $date = prevDate($date, $duration, $hiddenDays);
+        $date = prevDate($date, {...$duration, months: 1}, $hiddenDays);
         return this;
     }
 

@@ -22,13 +22,13 @@
         nextDisabled = false;
         if ($validRange.start) {
             let currentDate = cloneDate($date);
-            $date = prevDate($date, $duration, $hiddenDays);
+            $date = prevDate($date, {...$duration, months: 1}, $hiddenDays);
             prevDisabled = test();
             $date = currentDate;
         }
         if ($validRange.end) {
             let currentDate = cloneDate($date);
-            $date = nextDate($date, $duration);
+            $date = nextDate($date, {...$duration, months: 1});
             nextDisabled = test();
             $date = currentDate;
         }
@@ -47,11 +47,11 @@
     }
 
     function prev() {
-        $date = prevDate($date, $duration, $hiddenDays);
+        $date = prevDate($date, {...$duration, months: 1}, $hiddenDays);
     }
 
     function next() {
-        $date = nextDate($date, $duration);
+        $date = nextDate($date, {...$duration, months: 1});
     }
 </script>
 

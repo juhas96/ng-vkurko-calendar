@@ -50,6 +50,8 @@ export default class {
         this._iEvents = writable([null, null]);  // interaction events: [drag/resize, pointer]
         this._iClasses = writable(identity);  // interaction event css classes
         this._iClass = writable(undefined);  // interaction css class for entire calendar
+        // Possible values: 'next', 'previous', or null (no direction)
+        this.timelineScrollDirection = writable(undefined);  // scrolled to date
 
         // Set & Get
         this._set = (key, value) => {

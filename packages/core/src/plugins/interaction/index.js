@@ -38,6 +38,7 @@ export default {
         options.theme.resizingY = 'ec-resizing-y';
         options.theme.resizingX = 'ec-resizing-x';
         options.theme.selecting = 'ec-selecting';
+        options.monthsChanged = undefined;
     },
 
     createStores(state) {
